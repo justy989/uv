@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+gcc map_picker.c -o map_picker
+./map_picker
+rm map_picker

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -x
+set -e
+
+gcc map_picker.c -o map_picker
+PICK=$(./map_picker)
+rm map_picker
+./play $PICK

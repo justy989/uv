@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -x
+
+if [ "$#" -ne 2 ]; then
+     echo "usage ./play [game] [mapid]"
+     exit 1
+fi
+
+DEMO=JT_
+WAD=~/doom/
+WARP=$2
+case $1 in
+     "d1")
+          DEMO+=Doom1
+          WAD+=doom.wad
+          EPISODE=$(expr $2 / 10)
+          MAP=$(expr $2 % 10)
+          WARP="$EPISODE $MAP"
+          ;;
+     "d2")
+          DEMO+=Doom2
+          WAD+=doom2.wad
+          ;;
+     "tnt")
+          DEMO+=TNT
+          WAD+=tnt.wad
+          ;;
+     "*")
+          echo "unknown game. see help."
+          exit 1
+          ;;
+esac
+
+DEMO+=_$2
+
+~/repos/cndoom-2.0.3.2/src/cndoom -record $DEMO -skill 4 -iwad $WAD -warp $WARP
